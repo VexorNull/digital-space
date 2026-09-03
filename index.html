@@ -16,7 +16,7 @@
             --accent-glow: rgba(0, 242, 254, 0.65);
             --accent-purple: #9d4edd;
             --accent-cyan: #00d2ff;
-            --accent-green: #10b981;
+            --accent-green: #25D366; /* WhatsApp Green */
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.14);
@@ -244,11 +244,21 @@
             transition: 0.3s;
             border: none;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
         }
 
         .cta-btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 0 60px var(--accent-glow);
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E) !important;
+            color: #fff !important;
+            box-shadow: 0 0 35px rgba(37, 211, 102, 0.4) !important;
         }
 
         .secondary-btn {
@@ -538,7 +548,7 @@
             <div style="padding: 0 1.3rem 1.3rem 1.3rem;">
                 <div class="terminal-input-line">
                     <span style="color: var(--accent); font-family: 'Fira Code';">$</span>
-                    <input type="text" id="term-input" placeholder="type help, bio, matrix, warp, ping..." autocomplete="off">
+                    <input type="text" id="term-input" placeholder="type help, bio, whatsapp, matrix..." autocomplete="off">
                 </div>
             </div>
         </div>
@@ -578,7 +588,7 @@
             <div class="tilt-card project-card" data-category="web" onmouseenter="playAudioTone(480, 960, 'triangle')">
                 <i class="fa-solid fa-globe"></i>
                 <h3>vexor-null.vercel.app</h3>
-                <p>Official portfolio platform featuring dynamic audio feedback, interactive canvas physics, and custom interactive terminal interface.</p>
+                <p>Official portfolio platform featuring dynamic audio feedback, interactive canvas physics, and direct WhatsApp contact link integration.</p>
                 <div class="tags">
                     <span class="tag">HTML5/CSS3</span>
                     <span class="tag">JavaScript</span>
@@ -602,12 +612,14 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeContact()">&times;</span>
             <h2 style="font-size: 1.7rem; font-weight: 800;">Get In Touch</h2>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">Send a direct message to Tanveer Hussain.</p>
-            <form action="https://formspree.io/f/xbjnqrrr" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email Address" required>
-                <textarea name="message" rows="4" placeholder="Your Message..." required></textarea>
-                <button type="submit" class="cta-btn" style="width: 100%;">Send Message</button>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Submit this form to launch a pre-filled WhatsApp message directly to Tanveer.</p>
+            <form onsubmit="sendToWhatsApp(event)">
+                <input type="text" id="wa_name" placeholder="Your Name" required>
+                <input type="email" id="wa_email" placeholder="Your Email Address" required>
+                <textarea id="wa_message" rows="4" placeholder="Your Message..." required></textarea>
+                <button type="submit" class="cta-btn whatsapp-btn" style="width: 100%;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> Send via WhatsApp
+                </button>
             </form>
         </div>
     </div>
@@ -617,13 +629,28 @@
             Created by <strong>Tanveer Hussain</strong> (@vexornull)
         </div>
         <div class="socials">
+            <a href="https://wa.me/923229522470" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://instagram.com/vexornull" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://vexor-null.vercel.app" target="_blank"><i class="fa-solid fa-link"></i></a>
-            <a href="#"><i class="fa-brands fa-github"></i></a>
         </div>
     </footer>
 
     <script>
+        // WhatsApp Redirect Integration
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('wa_name').value;
+            const email = document.getElementById('wa_email').value;
+            const msg = document.getElementById('wa_message').value;
+
+            const phoneNumber = "923229522470";
+            const text = `*New Portfolio Contact Query*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Message:* ${encodeURIComponent(msg)}`;
+            
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${text}`;
+            window.open(whatsappURL, '_blank');
+            closeContact();
+        }
+
         // Custom Cursor Movement
         const follower = document.getElementById('cursor-follower');
         const dot = document.getElementById('cursor-dot');
@@ -787,9 +814,11 @@
                 resLine.style.color = '#94a3b8';
 
                 if (cmd === 'help') {
-                    resLine.innerHTML = `Commands: <span style="color:var(--accent)">bio</span>, <span style="color:var(--accent)">skills</span>, <span style="color:var(--accent)">ping</span>, <span style="color:var(--accent)">warp</span>, <span style="color:var(--accent)">matrix</span>, <span style="color:var(--accent)">contact</span>, <span style="color:var(--accent)">clear</span>`;
+                    resLine.innerHTML = `Commands: <span style="color:var(--accent)">bio</span>, <span style="color:var(--accent)">whatsapp</span>, <span style="color:var(--accent)">skills</span>, <span style="color:var(--accent)">ping</span>, <span style="color:var(--accent)">warp</span>, <span style="color:var(--accent)">matrix</span>, <span style="color:var(--accent)">contact</span>, <span style="color:var(--accent)">clear</span>`;
                 } else if (cmd === 'bio') {
                     resLine.innerHTML = `Tanveer Hussain 👑 | Web Designer | "Deeper than the algorithm"`;
+                } else if (cmd === 'whatsapp') {
+                    resLine.innerHTML = `WhatsApp Uplink: <a href="https://wa.me/923229522470" target="_blank" style="color:var(--accent-green)">+92 322 9522470</a>`;
                 } else if (cmd === 'skills') {
                     resLine.innerHTML = `Skills: Web Design, Custom UI/UX, JS V8, Canvas Particle Kinematics, Web Audio API.`;
                 } else if (cmd === 'ping') {
