@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Space | V9 Singularity Omniverse</title>
+    <title>Tanveer Hussain | Web Designer</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -118,7 +118,7 @@
 
         .logo span { color: var(--accent); }
 
-        /* Equalizer Visualizer */
+        /* Audio Visualizer */
         .audio-bars {
             display: flex;
             align-items: flex-end;
@@ -196,10 +196,10 @@
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 6vw, 5.2rem);
+            font-size: clamp(3rem, 5.5vw, 4.8rem);
             font-weight: 800;
-            line-height: 1.05;
-            margin-bottom: 1.6rem;
+            line-height: 1.08;
+            margin-bottom: 1rem;
             letter-spacing: -1.5px;
         }
 
@@ -209,11 +209,23 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero p.bio-quote {
             color: var(--text-muted);
-            font-size: 1.18rem;
-            margin-bottom: 2.4rem;
-            max-width: 620px;
+            font-size: 1.15rem;
+            font-style: italic;
+            margin-bottom: 2.2rem;
+            border-left: 3px solid var(--accent-purple);
+            padding-left: 1rem;
         }
 
         .btn-group {
@@ -258,7 +270,7 @@
             background: rgba(0, 242, 254, 0.06);
         }
 
-        /* Interactive Command Terminal */
+        /* Interactive Terminal */
         .terminal-card {
             background: rgba(4, 8, 22, 0.94);
             border: 1px solid var(--border);
@@ -312,7 +324,7 @@
             width: 100%;
         }
 
-        /* Layout Structure */
+        /* Sections Layout */
         .section { padding: 7.5rem 8%; position: relative; z-index: 1; }
         .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 2.5rem; letter-spacing: -0.5px; }
 
@@ -484,7 +496,7 @@
 
     <nav>
         <div class="logo">
-            <i class="fa-solid fa-infinity" style="color: var(--accent);"></i> DIGITAL<span>.SPACE V9</span>
+            <i class="fa-solid fa-crown" style="color: #f59e0b;"></i> TANVEER<span>.SPACE</span>
             <div class="audio-bars">
                 <div class="audio-bar"></div>
                 <div class="audio-bar"></div>
@@ -502,12 +514,13 @@
 
     <section class="hero" id="about">
         <div>
-            <div class="badge"><span class="badge-pulse"></span> Singularity Omniverse • V9 Ultimate Edition</div>
-            <h1>Omni-Driven <span>Futuristic Web Core</span></h1>
-            <p>Integrated with high-tier audio harmonics, interactive particle physics, dynamic matrix visual engines, and sub-millisecond execution state.</p>
+            <div class="badge"><span class="badge-pulse"></span> @vexornull • Official Portfolio</div>
+            <h1>Tanveer Hussain <span>👑</span></h1>
+            <div class="hero-subtitle"><i class="fa-solid fa-code"></i> Web Designer</div>
+            <p class="bio-quote">“Deeper than the algorithm”</p>
             
             <div class="btn-group">
-                <a href="#projects" class="cta-btn" onclick="playAudioTone(520, 1040, 'triangle')">Explore Systems</a>
+                <a href="#projects" class="cta-btn" onclick="playAudioTone(520, 1040, 'triangle')">Explore Work</a>
                 <button class="secondary-btn" onclick="openContact(); playAudioTone(620, 1240, 'sine');">Direct Contact</button>
             </div>
         </div>
@@ -517,69 +530,69 @@
                 <div class="dot red"></div>
                 <div class="dot yellow"></div>
                 <div class="dot green"></div>
-                <span style="font-family: 'Fira Code'; font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">singularity-core.sh</span>
+                <span style="font-family: 'Fira Code'; font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">vexornull@system:~</span>
             </div>
             <div class="terminal-body" id="terminal-history">
-                <p style="color: var(--text-muted);">Singularity Engine Active. Type <span style="color: var(--accent);">'help'</span> for operations.</p>
+                <p style="color: var(--text-muted);">Welcome to Tanveer's Terminal Core. Type <span style="color: var(--accent);">'help'</span> for operations.</p>
             </div>
             <div style="padding: 0 1.3rem 1.3rem 1.3rem;">
                 <div class="terminal-input-line">
                     <span style="color: var(--accent); font-family: 'Fira Code';">$</span>
-                    <input type="text" id="term-input" placeholder="type help, matrix, warp, ping, skills..." autocomplete="off">
+                    <input type="text" id="term-input" placeholder="type help, bio, matrix, warp, ping..." autocomplete="off">
                 </div>
             </div>
         </div>
     </section>
 
     <section class="section" id="capabilities">
-        <h2 class="section-title">Singularity Capabilities</h2>
+        <h2 class="section-title">Design & Engineering</h2>
         <div class="grid">
             <div class="tilt-card" onmouseenter="playAudioTone(360, 720, 'sine')">
-                <i class="fa-solid fa-server"></i>
-                <h3>High-Velocity V8 Core</h3>
-                <p>Engineered for instant DOM rendering, optimized CSS paint layers, and low latency event loops.</p>
+                <i class="fa-solid fa-pen-nib"></i>
+                <h3>Web Design & UI/UX</h3>
+                <p>Creating clean, immersive, glassmorphic digital experiences tailored beyond standard templates.</p>
             </div>
             <div class="tilt-card" onmouseenter="playAudioTone(360, 720, 'sine')">
-                <i class="fa-solid fa-circle-nodes"></i>
-                <h3>Particle Matrix Dynamics</h3>
-                <p>Interactive vector canvas calculations, force-fields, and dynamic connection lines.</p>
+                <i class="fa-solid fa-code"></i>
+                <h3>Modern Web Core</h3>
+                <p>High-performance HTML5, CSS3, JavaScript, custom responsive frameworks, and lightweight scripts.</p>
             </div>
             <div class="tilt-card" onmouseenter="playAudioTone(360, 720, 'sine')">
                 <i class="fa-solid fa-compact-disc"></i>
-                <h3>Native Audio Synthesizer</h3>
-                <p>Pure Web Audio API feedback generator, synthesizing real-time frequencies on user interactions.</p>
+                <h3>Audio & Motion Engine</h3>
+                <p>Interactive web interfaces with real-time sound synthesis, smooth particle dynamic backgrounds, and custom cursor events.</p>
             </div>
         </div>
     </section>
 
     <section class="section" id="projects">
-        <h2 class="section-title">Omniverse Work</h2>
+        <h2 class="section-title">Featured Works</h2>
 
         <div class="filter-container">
-            <button class="filter-btn active" onclick="filterProjects('all'); playAudioTone(680, 1360, 'sine');">All Platforms</button>
-            <button class="filter-btn" onclick="filterProjects('web'); playAudioTone(680, 1360, 'sine');">Web Platforms</button>
+            <button class="filter-btn active" onclick="filterProjects('all'); playAudioTone(680, 1360, 'sine');">All Works</button>
+            <button class="filter-btn" onclick="filterProjects('web'); playAudioTone(680, 1360, 'sine');">Web Apps</button>
             <button class="filter-btn" onclick="filterProjects('core'); playAudioTone(680, 1360, 'sine');">Core Engines</button>
         </div>
 
         <div class="grid">
             <div class="tilt-card project-card" data-category="web" onmouseenter="playAudioTone(480, 960, 'triangle')">
-                <i class="fa-solid fa-diagram-project"></i>
-                <h3>Digital Space V9 Omniverse</h3>
-                <p>Advanced Web application featuring dynamic terminal commands, visualizers, particle physics, and glassmorphic UI.</p>
+                <i class="fa-solid fa-globe"></i>
+                <h3>vexor-null.vercel.app</h3>
+                <p>Official portfolio platform featuring dynamic audio feedback, interactive canvas physics, and custom interactive terminal interface.</p>
                 <div class="tags">
-                    <span class="tag">HTML5</span>
-                    <span class="tag">Canvas Particle Physics</span>
-                    <span class="tag">Web Audio</span>
+                    <span class="tag">HTML5/CSS3</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Vercel</span>
                 </div>
             </div>
 
             <div class="tilt-card project-card" data-category="core" onmouseenter="playAudioTone(480, 960, 'triangle')">
                 <i class="fa-solid fa-terminal"></i>
-                <h3>Singularity Monitor Tool</h3>
-                <p>System diagnostic dashboard built for minimal memory allocation and fast interactive metrics feedback.</p>
+                <h3>Interactive Shell Core</h3>
+                <p>Lightweight client-side terminal shell supporting matrix rain toggles, particle warp speeds, and dynamic audio soundscapes.</p>
                 <div class="tags">
-                    <span class="tag">JavaScript V8</span>
-                    <span class="tag">Matrix Core</span>
+                    <span class="tag">Canvas API</span>
+                    <span class="tag">Web Audio</span>
                 </div>
             </div>
         </div>
@@ -588,25 +601,25 @@
     <div class="modal" id="contactModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeContact()">&times;</span>
-            <h2 style="font-size: 1.7rem; font-weight: 800;">Establish Singularity Uplink</h2>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">Transmit direct message into system log.</p>
+            <h2 style="font-size: 1.7rem; font-weight: 800;">Get In Touch</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Send a direct message to Tanveer Hussain.</p>
             <form action="https://formspree.io/f/xbjnqrrr" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email Address" required>
                 <textarea name="message" rows="4" placeholder="Your Message..." required></textarea>
-                <button type="submit" class="cta-btn" style="width: 100%;">Transmit Message</button>
+                <button type="submit" class="cta-btn" style="width: 100%;">Send Message</button>
             </form>
         </div>
     </div>
 
     <footer>
         <div class="credit">
-            Singularity Omniverse • Credit <strong>@VexorNull Social Handle</strong>
+            Created by <strong>Tanveer Hussain</strong> (@vexornull)
         </div>
         <div class="socials">
+            <a href="https://instagram.com/vexornull" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://vexor-null.vercel.app" target="_blank"><i class="fa-solid fa-link"></i></a>
             <a href="#"><i class="fa-brands fa-github"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
         </div>
     </footer>
 
@@ -756,7 +769,7 @@
         }
         animate();
 
-        // Terminal Shell System
+        // Terminal System
         const termInput = document.getElementById('term-input');
         const termHistory = document.getElementById('terminal-history');
 
@@ -774,22 +787,22 @@
                 resLine.style.color = '#94a3b8';
 
                 if (cmd === 'help') {
-                    resLine.innerHTML = `Commands: <span style="color:var(--accent)">skills</span>, <span style="color:var(--accent)">ping</span>, <span style="color:var(--accent)">warp</span>, <span style="color:var(--accent)">matrix</span>, <span style="color:var(--accent)">projects</span>, <span style="color:var(--accent)">contact</span>, <span style="color:var(--accent)">clear</span>`;
+                    resLine.innerHTML = `Commands: <span style="color:var(--accent)">bio</span>, <span style="color:var(--accent)">skills</span>, <span style="color:var(--accent)">ping</span>, <span style="color:var(--accent)">warp</span>, <span style="color:var(--accent)">matrix</span>, <span style="color:var(--accent)">contact</span>, <span style="color:var(--accent)">clear</span>`;
+                } else if (cmd === 'bio') {
+                    resLine.innerHTML = `Tanveer Hussain 👑 | Web Designer | "Deeper than the algorithm"`;
                 } else if (cmd === 'skills') {
-                    resLine.innerHTML = `Core Matrix: Pure JS V8, Canvas Particle Kinematics, Web Audio API, Matrix Rain Engine.`;
+                    resLine.innerHTML = `Skills: Web Design, Custom UI/UX, JS V8, Canvas Particle Kinematics, Web Audio API.`;
                 } else if (cmd === 'ping') {
-                    resLine.innerHTML = `Singularity Status: <span style="color:var(--accent-green)">0.08ms</span> Latency Nominal.`;
+                    resLine.innerHTML = `System Status: <span style="color:var(--accent-green)">0.08ms</span> Latency Nominal.`;
                 } else if (cmd === 'warp') {
                     warpSpeed = warpSpeed === 1 ? 4.5 : 1;
                     resLine.innerHTML = `Particle Speed set to ${warpSpeed === 4.5 ? 'HYPER-DRIVE (4.5x)' : 'STANDARD (1x)'}.`;
                 } else if (cmd === 'matrix') {
                     isMatrixMode = !isMatrixMode;
                     resLine.innerHTML = `Matrix Digital Rain ${isMatrixMode ? 'ACTIVATED' : 'DEACTIVATED'}.`;
-                } else if (cmd === 'projects') {
-                    resLine.innerHTML = `Active Systems: Digital Space V9 Omniverse, Singularity Monitor Tool. Check 'Work' section.`;
                 } else if (cmd === 'contact') {
                     openContact();
-                    resLine.innerHTML = `Opening Singularity Contact Uplink...`;
+                    resLine.innerHTML = `Opening Contact Uplink...`;
                 } else if (cmd === 'clear') {
                     termHistory.innerHTML = '';
                     return;
