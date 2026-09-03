@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Space | V8 Quantum Nexus</title>
+    <title>Digital Space | V9 Singularity Omniverse</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg: #000308;
-            --surface: rgba(6, 11, 25, 0.82);
-            --surface-hover: rgba(12, 20, 42, 0.92);
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.65);
-            --accent-purple: #a855f7;
-            --accent-cyan: #06b6d4;
+            --bg: #010208;
+            --surface: rgba(8, 14, 30, 0.85);
+            --surface-hover: rgba(16, 26, 50, 0.95);
+            --accent: #00f2fe;
+            --accent-glow: rgba(0, 242, 254, 0.65);
+            --accent-purple: #9d4edd;
+            --accent-cyan: #00d2ff;
             --accent-green: #10b981;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.12);
+            --border: rgba(255, 255, 255, 0.14);
         }
 
         * {
@@ -38,12 +38,12 @@
             position: relative;
         }
 
-        /* Quantum Dynamic Cursor */
+        /* Dynamic Cursor */
         #cursor-follower {
             position: fixed;
-            width: 34px;
-            height: 34px;
-            border: 2px dashed var(--accent-cyan);
+            width: 36px;
+            height: 36px;
+            border: 2px dashed var(--accent);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
@@ -79,7 +79,7 @@
             box-shadow: 0 0 15px var(--accent);
         }
 
-        #quantum-canvas {
+        #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -95,7 +95,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 8%;
-            background: rgba(2, 6, 18, 0.8);
+            background: rgba(2, 6, 20, 0.85);
             backdrop-filter: blur(30px);
             position: fixed;
             width: 90%;
@@ -116,9 +116,9 @@
             gap: 0.6rem;
         }
 
-        .logo span { color: var(--accent-cyan); }
+        .logo span { color: var(--accent); }
 
-        /* Audio Visualizer Waves */
+        /* Equalizer Visualizer */
         .audio-bars {
             display: flex;
             align-items: flex-end;
@@ -130,12 +130,12 @@
         .audio-bar {
             width: 3px;
             height: 100%;
-            background: var(--accent-cyan);
+            background: var(--accent);
             border-radius: 3px;
             animation: bounce 1.2s ease-in-out infinite alternate;
         }
 
-        .audio-bar:nth-child(2) { animation-delay: 0.2s; background: var(--accent); }
+        .audio-bar:nth-child(2) { animation-delay: 0.2s; background: var(--accent-cyan); }
         .audio-bar:nth-child(3) { animation-delay: 0.4s; background: var(--accent-purple); }
         .audio-bar:nth-child(4) { animation-delay: 0.6s; background: var(--accent-green); }
 
@@ -158,7 +158,7 @@
             transition: 0.3s;
         }
 
-        .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-glow); }
+        .nav-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
 
         /* Hero Container */
         .hero {
@@ -177,9 +177,9 @@
             align-items: center;
             gap: 0.6rem;
             padding: 0.45rem 1.3rem;
-            background: rgba(6, 182, 212, 0.08);
-            border: 1px solid var(--accent-cyan);
-            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid var(--accent);
+            color: var(--accent);
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
@@ -204,7 +204,7 @@
         }
 
         .hero h1 span {
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent), var(--accent-purple));
+            background: linear-gradient(90deg, var(--accent), var(--accent-cyan), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -223,7 +223,7 @@
 
         .cta-btn {
             padding: 1rem 2.6rem;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent));
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
             color: #000;
             font-weight: 800;
             border-radius: 14px;
@@ -253,26 +253,26 @@
         }
 
         .secondary-btn:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            background: rgba(6, 182, 212, 0.06);
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 242, 254, 0.06);
         }
 
         /* Interactive Command Terminal */
         .terminal-card {
-            background: rgba(4, 8, 20, 0.92);
+            background: rgba(4, 8, 22, 0.94);
             border: 1px solid var(--border);
             border-radius: 22px;
             overflow: hidden;
             box-shadow: 0 35px 80px rgba(0,0,0,0.95);
             display: flex;
             flex-direction: column;
-            height: 380px;
+            height: 390px;
             backdrop-filter: blur(25px);
         }
 
         .terminal-header {
-            background: rgba(10, 16, 32, 0.95);
+            background: rgba(10, 16, 36, 0.95);
             padding: 1rem 1.3rem;
             display: flex;
             align-items: center;
@@ -306,7 +306,7 @@
             background: transparent;
             border: none;
             outline: none;
-            color: var(--accent-cyan);
+            color: var(--accent);
             font-family: 'Fira Code', monospace;
             font-size: 0.88rem;
             width: 100%;
@@ -337,9 +337,9 @@
         }
 
         .filter-btn.active, .filter-btn:hover {
-            background: var(--accent-cyan);
+            background: var(--accent);
             color: #000;
-            border-color: var(--accent-cyan);
+            border-color: var(--accent);
             box-shadow: 0 0 20px var(--accent-glow);
         }
 
@@ -361,11 +361,11 @@
         }
 
         .tilt-card:hover {
-            border-color: var(--accent-cyan);
+            border-color: var(--accent);
             background: var(--surface-hover);
         }
 
-        .tilt-card i { font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 1.5rem; }
+        .tilt-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
         .tilt-card h3 { font-size: 1.4rem; margin-bottom: 0.7rem; font-weight: 800; }
         .tilt-card p { color: var(--text-muted); font-size: 0.98rem; }
 
@@ -399,7 +399,7 @@
         }
 
         .modal-content {
-            background: rgba(8, 12, 22, 0.95);
+            background: rgba(8, 14, 30, 0.95);
             padding: 3rem;
             border-radius: 26px;
             border: 1px solid var(--border);
@@ -419,7 +419,7 @@
             transition: 0.3s;
         }
 
-        .close-btn:hover { color: var(--accent-cyan); }
+        .close-btn:hover { color: var(--accent); }
 
         .modal form {
             display: flex;
@@ -438,11 +438,11 @@
             font-size: 0.95rem;
         }
 
-        .modal input:focus, .modal textarea:focus { border-color: var(--accent-cyan); }
+        .modal input:focus, .modal textarea:focus { border-color: var(--accent); }
 
         footer {
             padding: 3.8rem 8%;
-            background: rgba(4, 8, 18, 0.95);
+            background: rgba(4, 8, 20, 0.95);
             border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -454,7 +454,7 @@
         }
 
         .credit { color: var(--text-muted); font-size: 0.95rem; }
-        .credit strong { color: var(--accent-cyan); }
+        .credit strong { color: var(--accent); }
 
         .socials a {
             color: var(--text-muted);
@@ -463,7 +463,7 @@
             transition: 0.3s;
         }
 
-        .socials a:hover { color: var(--accent-cyan); }
+        .socials a:hover { color: var(--accent); }
 
         @media (max-width: 968px) {
             .hero { grid-template-columns: 1fr; padding-top: 150px; }
@@ -480,11 +480,11 @@
     <div id="cursor-follower"></div>
     <div id="cursor-dot"></div>
     <div id="scroll-progress"></div>
-    <canvas id="quantum-canvas"></canvas>
+    <canvas id="bg-canvas"></canvas>
 
     <nav>
         <div class="logo">
-            <i class="fa-solid fa-atom" style="color: var(--accent-cyan);"></i> DIGITAL<span>.SPACE V8</span>
+            <i class="fa-solid fa-infinity" style="color: var(--accent);"></i> DIGITAL<span>.SPACE V9</span>
             <div class="audio-bars">
                 <div class="audio-bar"></div>
                 <div class="audio-bar"></div>
@@ -502,13 +502,13 @@
 
     <section class="hero" id="about">
         <div>
-            <div class="badge"><span class="badge-pulse"></span> Quantum Nexus Core • V8 Hyper Engine</div>
-            <h1>Quantum <span>Performance Platforms</span></h1>
-            <p>Engineered with Web Audio synthesis, real-time particle kinematics, matrix-based glitch interactions, and V8 hardware acceleration.</p>
+            <div class="badge"><span class="badge-pulse"></span> Singularity Omniverse • V9 Ultimate Edition</div>
+            <h1>Omni-Driven <span>Futuristic Web Core</span></h1>
+            <p>Integrated with high-tier audio harmonics, interactive particle physics, dynamic matrix visual engines, and sub-millisecond execution state.</p>
             
             <div class="btn-group">
-                <a href="#projects" class="cta-btn" onclick="playQuantumAudio(500, 1000, 'triangle')">Explore Nexus</a>
-                <button class="secondary-btn" onclick="openContact(); playQuantumAudio(600, 1200, 'sine');">Direct Uplink</button>
+                <a href="#projects" class="cta-btn" onclick="playAudioTone(520, 1040, 'triangle')">Explore Systems</a>
+                <button class="secondary-btn" onclick="openContact(); playAudioTone(620, 1240, 'sine');">Direct Contact</button>
             </div>
         </div>
 
@@ -517,69 +517,69 @@
                 <div class="dot red"></div>
                 <div class="dot yellow"></div>
                 <div class="dot green"></div>
-                <span style="font-family: 'Fira Code'; font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">quantum-core.sh</span>
+                <span style="font-family: 'Fira Code'; font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">singularity-core.sh</span>
             </div>
             <div class="terminal-body" id="terminal-history">
-                <p style="color: var(--text-muted);">Quantum Nexus Active. Type <span style="color: var(--accent-cyan);">'help'</span> for available operational protocols.</p>
+                <p style="color: var(--text-muted);">Singularity Engine Active. Type <span style="color: var(--accent);">'help'</span> for operations.</p>
             </div>
             <div style="padding: 0 1.3rem 1.3rem 1.3rem;">
                 <div class="terminal-input-line">
-                    <span style="color: var(--accent-cyan); font-family: 'Fira Code';">$</span>
-                    <input type="text" id="term-input" placeholder="type help, warp, ping, skills..." autocomplete="off">
+                    <span style="color: var(--accent); font-family: 'Fira Code';">$</span>
+                    <input type="text" id="term-input" placeholder="type help, matrix, warp, ping, skills..." autocomplete="off">
                 </div>
             </div>
         </div>
     </section>
 
     <section class="section" id="capabilities">
-        <h2 class="section-title">Quantum Capabilities</h2>
+        <h2 class="section-title">Singularity Capabilities</h2>
         <div class="grid">
-            <div class="tilt-card" onmouseenter="playQuantumAudio(350, 700, 'sine')">
-                <i class="fa-solid fa-microchip"></i>
-                <h3>Sub-Millisecond Engine</h3>
-                <p>Zero layout shifts, instant reactive state hydration, and high-velocity CSS rendering pipelines.</p>
+            <div class="tilt-card" onmouseenter="playAudioTone(360, 720, 'sine')">
+                <i class="fa-solid fa-server"></i>
+                <h3>High-Velocity V8 Core</h3>
+                <p>Engineered for instant DOM rendering, optimized CSS paint layers, and low latency event loops.</p>
             </div>
-            <div class="tilt-card" onmouseenter="playQuantumAudio(350, 700, 'sine')">
-                <i class="fa-solid fa-network-wired"></i>
-                <h3>Dynamic Particle Physics</h3>
-                <p>Dynamic force-field particle velocity, connection web vectors, and mouse coordinate acceleration.</p>
+            <div class="tilt-card" onmouseenter="playAudioTone(360, 720, 'sine')">
+                <i class="fa-solid fa-circle-nodes"></i>
+                <h3>Particle Matrix Dynamics</h3>
+                <p>Interactive vector canvas calculations, force-fields, and dynamic connection lines.</p>
             </div>
-            <div class="tilt-card" onmouseenter="playQuantumAudio(350, 700, 'sine')">
-                <i class="fa-solid fa-wave-square"></i>
-                <h3>Audio Synthesis</h3>
-                <p>Native Web Audio API sound generator delivering custom feedback tones during hover and click states.</p>
+            <div class="tilt-card" onmouseenter="playAudioTone(360, 720, 'sine')">
+                <i class="fa-solid fa-compact-disc"></i>
+                <h3>Native Audio Synthesizer</h3>
+                <p>Pure Web Audio API feedback generator, synthesizing real-time frequencies on user interactions.</p>
             </div>
         </div>
     </section>
 
     <section class="section" id="projects">
-        <h2 class="section-title">Nexus Projects</h2>
+        <h2 class="section-title">Omniverse Work</h2>
 
         <div class="filter-container">
-            <button class="filter-btn active" onclick="filterProjects('all'); playQuantumAudio(650, 1300, 'sine');">All Platforms</button>
-            <button class="filter-btn" onclick="filterProjects('web'); playQuantumAudio(650, 1300, 'sine');">Web Platforms</button>
-            <button class="filter-btn" onclick="filterProjects('core'); playQuantumAudio(650, 1300, 'sine');">Core Engines</button>
+            <button class="filter-btn active" onclick="filterProjects('all'); playAudioTone(680, 1360, 'sine');">All Platforms</button>
+            <button class="filter-btn" onclick="filterProjects('web'); playAudioTone(680, 1360, 'sine');">Web Platforms</button>
+            <button class="filter-btn" onclick="filterProjects('core'); playAudioTone(680, 1360, 'sine');">Core Engines</button>
         </div>
 
         <div class="grid">
-            <div class="tilt-card project-card" data-category="web" onmouseenter="playQuantumAudio(450, 900, 'triangle')">
-                <i class="fa-solid fa-layer-group"></i>
-                <h3>Digital Space V8 Nexus</h3>
-                <p>Interactive web environment equipped with real-time command terminal, audio visualizers, and glassmorphic UI elements.</p>
+            <div class="tilt-card project-card" data-category="web" onmouseenter="playAudioTone(480, 960, 'triangle')">
+                <i class="fa-solid fa-diagram-project"></i>
+                <h3>Digital Space V9 Omniverse</h3>
+                <p>Advanced Web application featuring dynamic terminal commands, visualizers, particle physics, and glassmorphic UI.</p>
                 <div class="tags">
                     <span class="tag">HTML5</span>
-                    <span class="tag">Quantum Kinematics</span>
-                    <span class="tag">Web Audio API</span>
+                    <span class="tag">Canvas Particle Physics</span>
+                    <span class="tag">Web Audio</span>
                 </div>
             </div>
 
-            <div class="tilt-card project-card" data-category="core" onmouseenter="playQuantumAudio(450, 900, 'triangle')">
-                <i class="fa-solid fa-shield-virus"></i>
-                <h3>Quantum Core Monitor</h3>
-                <p>System monitoring suite built for low-latency operational visual feedback and high frame-rate performance.</p>
+            <div class="tilt-card project-card" data-category="core" onmouseenter="playAudioTone(480, 960, 'triangle')">
+                <i class="fa-solid fa-terminal"></i>
+                <h3>Singularity Monitor Tool</h3>
+                <p>System diagnostic dashboard built for minimal memory allocation and fast interactive metrics feedback.</p>
                 <div class="tags">
                     <span class="tag">JavaScript V8</span>
-                    <span class="tag">Web Physics</span>
+                    <span class="tag">Matrix Core</span>
                 </div>
             </div>
         </div>
@@ -588,7 +588,7 @@
     <div class="modal" id="contactModal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeContact()">&times;</span>
-            <h2 style="font-size: 1.7rem; font-weight: 800;">Establish Quantum Uplink</h2>
+            <h2 style="font-size: 1.7rem; font-weight: 800;">Establish Singularity Uplink</h2>
             <p style="color: var(--text-muted); font-size: 0.95rem;">Transmit direct message into system log.</p>
             <form action="https://formspree.io/f/xbjnqrrr" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required>
@@ -601,7 +601,7 @@
 
     <footer>
         <div class="credit">
-            Quantum Nexus Engine • Credit <strong>@VexorNull Social Handle</strong>
+            Singularity Omniverse • Credit <strong>@VexorNull Social Handle</strong>
         </div>
         <div class="socials">
             <a href="#"><i class="fa-brands fa-github"></i></a>
@@ -611,7 +611,7 @@
     </footer>
 
     <script>
-        // Custom Dynamic Cursor Controls
+        // Custom Cursor Movement
         const follower = document.getElementById('cursor-follower');
         const dot = document.getElementById('cursor-dot');
 
@@ -622,9 +622,9 @@
             dot.style.top = e.clientY + 'px';
         });
 
-        // Web Audio Synthesizer
+        // Web Audio Synthesizer Engine
         let audioCtx;
-        function playQuantumAudio(startFreq, endFreq, waveType = 'sine') {
+        function playAudioTone(startFreq, endFreq, waveType = 'sine') {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -657,16 +657,21 @@
             document.getElementById('scroll-progress').style.width = scrollPercent + '%';
         });
 
-        // Quantum Canvas Animation
-        const canvas = document.getElementById('quantum-canvas');
+        // Canvas Engine with Particle & Matrix Rain Capabilities
+        const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         let mouseX = 0, mouseY = 0;
         let warpSpeed = 1;
+        let isMatrixMode = false;
+        const matrixChars = "01010101ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let matrixDrops = [];
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            const columns = Math.floor(canvas.width / 20);
+            matrixDrops = Array(columns).fill(1);
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
@@ -703,7 +708,7 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(6, 182, 212, ${this.alpha})`;
+                ctx.fillStyle = `rgba(0, 242, 254, ${this.alpha})`;
                 ctx.fill();
             }
         }
@@ -711,23 +716,39 @@
         for (let i = 0; i < 90; i++) particles.push(new Particle());
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+            if (isMatrixMode) {
+                ctx.fillStyle = "rgba(1, 2, 8, 0.08)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#00f2fe";
+                ctx.font = "14px monospace";
 
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+                for (let i = 0; i < matrixDrops.length; i++) {
+                    const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+                    ctx.fillText(text, i * 20, matrixDrops[i] * 20);
+                    if (matrixDrops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                        matrixDrops[i] = 0;
+                    }
+                    matrixDrops[i]++;
+                }
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
 
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(6, 182, 212, ${0.18 - dist/120})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.stroke();
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(0, 242, 254, ${0.18 - dist/120})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.stroke();
+                        }
                     }
                 }
             }
@@ -735,7 +756,7 @@
         }
         animate();
 
-        // Terminal Operations Shell
+        // Terminal Shell System
         const termInput = document.getElementById('term-input');
         const termHistory = document.getElementById('terminal-history');
 
@@ -743,34 +764,37 @@
             if (e.key === 'Enter') {
                 const cmd = termInput.value.trim().toLowerCase();
                 termInput.value = '';
-                playQuantumAudio(800, 1600, 'square');
+                playAudioTone(800, 1600, 'square');
 
                 const cmdLine = document.createElement('p');
-                cmdLine.innerHTML = `<span style="color: var(--accent-cyan);">$</span> ${cmd}`;
+                cmdLine.innerHTML = `<span style="color: var(--accent);">$</span> ${cmd}`;
                 termHistory.appendChild(cmdLine);
 
                 const resLine = document.createElement('p');
                 resLine.style.color = '#94a3b8';
 
                 if (cmd === 'help') {
-                    resLine.innerHTML = `Quantum Commands: <span style="color:var(--accent-cyan)">skills</span>, <span style="color:var(--accent-cyan)">ping</span>, <span style="color:var(--accent-cyan)">warp</span>, <span style="color:var(--accent-cyan)">projects</span>, <span style="color:var(--accent-cyan)">contact</span>, <span style="color:var(--accent-cyan)">clear</span>`;
+                    resLine.innerHTML = `Commands: <span style="color:var(--accent)">skills</span>, <span style="color:var(--accent)">ping</span>, <span style="color:var(--accent)">warp</span>, <span style="color:var(--accent)">matrix</span>, <span style="color:var(--accent)">projects</span>, <span style="color:var(--accent)">contact</span>, <span style="color:var(--accent)">clear</span>`;
                 } else if (cmd === 'skills') {
-                    resLine.innerHTML = `Matrix Core: Pure JS V8, Canvas Particle Kinematics, Dynamic Audio API, Ultra Glassmorphism.`;
+                    resLine.innerHTML = `Core Matrix: Pure JS V8, Canvas Particle Kinematics, Web Audio API, Matrix Rain Engine.`;
                 } else if (cmd === 'ping') {
-                    resLine.innerHTML = `Quantum Response: <span style="color:var(--accent-green)">0.12ms</span> Latency Nominal.`;
+                    resLine.innerHTML = `Singularity Status: <span style="color:var(--accent-green)">0.08ms</span> Latency Nominal.`;
                 } else if (cmd === 'warp') {
                     warpSpeed = warpSpeed === 1 ? 4.5 : 1;
-                    resLine.innerHTML = `Particle Warp Drive set to ${warpSpeed === 4.5 ? 'HYPER-SPEED (4.5x)' : 'NOMINAL (1x)'}.`;
+                    resLine.innerHTML = `Particle Speed set to ${warpSpeed === 4.5 ? 'HYPER-DRIVE (4.5x)' : 'STANDARD (1x)'}.`;
+                } else if (cmd === 'matrix') {
+                    isMatrixMode = !isMatrixMode;
+                    resLine.innerHTML = `Matrix Digital Rain ${isMatrixMode ? 'ACTIVATED' : 'DEACTIVATED'}.`;
                 } else if (cmd === 'projects') {
-                    resLine.innerHTML = `Active Systems: Digital Space V8 Nexus, Quantum Core Monitor. Check 'Work' section.`;
+                    resLine.innerHTML = `Active Systems: Digital Space V9 Omniverse, Singularity Monitor Tool. Check 'Work' section.`;
                 } else if (cmd === 'contact') {
                     openContact();
-                    resLine.innerHTML = `Opening Quantum Uplink Modal...`;
+                    resLine.innerHTML = `Opening Singularity Contact Uplink...`;
                 } else if (cmd === 'clear') {
                     termHistory.innerHTML = '';
                     return;
                 } else {
-                    resLine.innerHTML = `Unrecognized Operational Command. Type <span style="color:var(--accent-cyan)">'help'</span>.`;
+                    resLine.innerHTML = `Unrecognized Operational Command. Type <span style="color:var(--accent)">'help'</span>.`;
                 }
 
                 termHistory.appendChild(resLine);
@@ -778,7 +802,7 @@
             }
         });
 
-        // 3D Card Physics
+        // 3D Card Interactive Physics
         document.querySelectorAll('.tilt-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -792,7 +816,7 @@
             });
         });
 
-        // Category Filter
+        // Projects Filter
         function filterProjects(category) {
             const cards = document.querySelectorAll('.project-card');
             const btns = document.querySelectorAll('.filter-btn');
