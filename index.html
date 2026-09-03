@@ -154,12 +154,40 @@
 
         .logo span { color: var(--accent); }
 
+        .time-badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            color: var(--accent-cyan);
+            margin-left: 1rem;
+        }
+
+        .sound-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .sound-toggle-btn:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
         .audio-bars {
             display: flex;
             align-items: flex-end;
             gap: 3px;
             height: 18px;
-            margin-left: 1rem;
+            margin-left: 0.5rem;
         }
 
         .audio-bar {
@@ -183,6 +211,7 @@
             display: flex;
             gap: 2.2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -314,7 +343,7 @@
             background: rgba(0, 242, 254, 0.06);
         }
 
-        /* 50+ Command Matrix Terminal Core */
+        /* Interactive Terminal Core */
         .terminal-card {
             background: rgba(4, 8, 22, 0.94);
             border: 1px solid var(--border);
@@ -323,7 +352,7 @@
             box-shadow: 0 35px 80px rgba(0,0,0,0.95);
             display: flex;
             flex-direction: column;
-            height: 440px;
+            height: 460px;
             backdrop-filter: blur(25px);
         }
 
@@ -351,11 +380,39 @@
             overflow-y: auto;
         }
 
+        .quick-cmd-bar {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.6rem 1.3rem;
+            background: rgba(0, 0, 0, 0.4);
+            border-top: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .cmd-chip {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .cmd-chip:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
         .terminal-input-line {
             display: flex;
             gap: 0.6rem;
             align-items: center;
-            margin-top: 0.5rem;
+            padding: 0.8rem 1.3rem;
+            background: rgba(2, 6, 20, 0.9);
         }
 
         .terminal-input-line input {
@@ -545,8 +602,10 @@
                 <div class="audio-bar"></div>
                 <div class="audio-bar"></div>
             </div>
+            <span class="time-badge" id="live-clock">00:00:00</span>
         </div>
         <ul class="nav-links">
+            <li><button class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleAudio()"><i class="fa-solid fa-volume-high"></i> Sound ON</button></li>
             <li><a href="#about">About</a></li>
             <li><a href="#capabilities">Capabilities</a></li>
             <li><a href="#projects">Work</a></li>
@@ -575,13 +634,21 @@
                 <span style="font-family: 'Fira Code'; font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">vexornull@system Matrix Shell [50+ Cmds]</span>
             </div>
             <div class="terminal-body" id="terminal-history">
-                <p style="color: var(--text-muted);">Tanveer Hussain Shell OS v4.0. Type <span style="color: var(--accent);">'help'</span> or <span style="color: var(--accent);">'matrix'</span> to unlock commands.</p>
+                <p style="color: var(--text-muted);">Tanveer Hussain Shell OS v4.5. Type <span style="color: var(--accent);">'help'</span> or click dynamic chips below.</p>
             </div>
-            <div style="padding: 0 1.3rem 1.3rem 1.3rem;">
-                <div class="terminal-input-line">
-                    <span style="color: var(--accent); font-family: 'Fira Code';">$</span>
-                    <input type="text" id="term-input" placeholder="type help, list, matrix, theme, whatsapp..." autocomplete="off">
-                </div>
+            
+            <div class="quick-cmd-bar">
+                <span class="cmd-chip" onclick="executeQuickCmd('help')">help</span>
+                <span class="cmd-chip" onclick="executeQuickCmd('matrix')">matrix</span>
+                <span class="cmd-chip" onclick="executeQuickCmd('warp')">warp</span>
+                <span class="cmd-chip" onclick="executeQuickCmd('skills')">skills</span>
+                <span class="cmd-chip" onclick="executeQuickCmd('whatsapp')">whatsapp</span>
+                <span class="cmd-chip" onclick="executeQuickCmd('stats')">stats</span>
+            </div>
+
+            <div class="terminal-input-line">
+                <span style="color: var(--accent); font-family: 'Fira Code';">$</span>
+                <input type="text" id="term-input" placeholder="type help, list, matrix, theme, whatsapp..." autocomplete="off">
             </div>
         </div>
     </section>
@@ -668,6 +735,54 @@
     </footer>
 
     <script>
+        // Real-Time Live Clock
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString();
+            document.getElementById('live-clock').innerText = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Audio Mute System
+        let isAudioMuted = false;
+        function toggleAudio() {
+            isAudioMuted = !isAudioMuted;
+            const btn = document.getElementById('soundToggleBtn');
+            if (isAudioMuted) {
+                btn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i> Sound OFF`;
+                btn.style.borderColor = '#ef4444';
+            } else {
+                btn.innerHTML = `<i class="fa-solid fa-volume-high"></i> Sound ON`;
+                btn.style.borderColor = 'var(--accent)';
+                playAudioTone(440, 880, 'sine');
+            }
+        }
+
+        let audioCtx;
+        function playAudioTone(startFreq, endFreq, waveType = 'sine') {
+            if (isAudioMuted) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = waveType;
+                osc.frequency.setValueAtTime(startFreq, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(endFreq, audioCtx.currentTime + 0.05);
+                
+                gain.gain.setValueAtTime(0.025, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch(e) {}
+        }
+
         function sendToWhatsApp(e) {
             e.preventDefault();
             const name = document.getElementById('wa_name').value;
@@ -691,29 +806,6 @@
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
         });
-
-        let audioCtx;
-        function playAudioTone(startFreq, endFreq, waveType = 'sine') {
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = waveType;
-                osc.frequency.setValueAtTime(startFreq, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(endFreq, audioCtx.currentTime + 0.05);
-                
-                gain.gain.setValueAtTime(0.025, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-                
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.05);
-            } catch(e) {}
-        }
 
         function openContact() { document.getElementById('contactModal').style.display = 'flex'; }
         function closeContact() { document.getElementById('contactModal').style.display = 'none'; }
@@ -822,109 +914,64 @@
         }
         animate();
 
-        // 50+ Command Matrix Terminal Execution Logic
+        // Terminal Core Execution Logic
         const termInput = document.getElementById('term-input');
         const termHistory = document.getElementById('terminal-history');
 
         const commandMatrix = {
             "help": "Core Cmds: bio, skills, matrix, whatsapp, instagram, contact, warp, ping, clear, list",
-            "list": "50+ Commands: bio, skills, whatsapp, instagram, location, portfolio, hire, services, motto, quote, ping, status, warp, matrix, color, theme, audio, sound, vibe, frequency, version, datetime, stats, roll, coffee, flip, calc, ip, whoami, uptime, echo, clear, banner, mode, rain, speed, repo, gui, reload, secret, god, admin, author, exit, cyan, purple, green, reset, panic, test",
+            "list": "50+ Commands: bio, skills, whatsapp, instagram, location, portfolio, hire, services, motto, quote, ping, status, warp, matrix, color, theme, audio, sound, vibe, frequency, version, datetime, stats, roll, coffee, flip, calc, ip, whoami, uptime, echo, clear, banner, mode, rain, speed, repo, gui, reload, secret, god, admin, author, exit",
             "bio": "Tanveer Hussain 👑 | Web Designer | Custom Web Architecture | 'Deeper than the algorithm'",
             "skills": "Web Design, Responsive UI/UX, JS Engine Integration, Canvas Animations, Sound FX Systems",
-            "whatsapp": "WhatsApp Direct: +92 322 9522470 (Opening window...)",
-            "instagram": "Instagram Branding Handle: @vexornull",
-            "location": "Based in Karachi, Pakistan 🇵🇰",
+            "whatsapp": "WhatsApp Direct: +92 322 9522470",
+            "instagram": "Instagram Handle: @vexornull",
+            "location": "Karachi, Pakistan 🇵🇰",
             "portfolio": "Live Host: vexor-null.vercel.app",
-            "hire": "Available for custom Web Design & Development projects.",
-            "services": "1. Modern Web Design 2. UI/UX Refinement 3. Custom Canvas Engines 4. Audio Systems",
-            "motto": "Deeper than the algorithm.",
-            "quote": "Design is not just what it looks like; design is how it works.",
-            "ping": "Pong! Network response: 0.04ms. Engine connected.",
-            "status": "System status: 100% Operational | Audio Synthesizer: Active",
-            "warp": "Toggled Hyper-Drive Particle Motion Mode.",
-            "matrix": "Toggled Digital Matrix Rain Simulation Engine.",
-            "color": "Theme Accent Changed to Neon Cyan.",
-            "theme": "Current Theme: Midnight Obsidian Cyberpunk.",
-            "audio": "Audio Synthesizer Status: Active (Web Audio API)",
-            "sound": "Playing high-frequency audio wave chime...",
-            "vibe": "Vibe Check Passed: 100% Modern Cyber Aesthetic.",
-            "frequency": "Synthesizer Base Harmonic: 440 Hz - 880 Hz Dynamic Sweep.",
-            "version": "Tanveer Shell OS v4.2.0-Production",
-            "datetime": new Date().toString(),
             "stats": "CPU: 2% | Memory: 18MB | Frame Rate: 60 FPS",
-            "roll": "Rolling dice... You rolled a 6 🎲!",
-            "coffee": "☕ Here is your coffee! Fuel for coding.",
-            "flip": "Flipping coin... Heads! 🪙",
-            "calc": "Calculator Engine Ready. Type basic math calculations.",
-            "ip": "Client Connection: 127.0.0.1 (Secure Local Endpoint)",
-            "whoami": "User: Distinguished Guest / Explorer",
-            "uptime": "System Uptime: 99.98% High Availability Mode",
-            "echo": "Echoing signal... Echo 1.. 2.. 3..",
-            "banner": "================ TANVEER HUSSAIN PORTFOLIO OS ================",
-            "mode": "Mode set to Cyber Stealth Operational State.",
-            "rain": "Matrix digital rain speed accelerated.",
-            "speed": "Particle Speed multiplier updated.",
-            "repo": "Vercel Platform Deployment Target: vexor-null.vercel.app",
-            "gui": "GUI elements fully rendered and synced.",
-            "reload": "Reloading page terminal matrix state...",
-            "secret": "🔓 Secret unlocked: You found Tanveer's secret terminal easter egg!",
-            "god": "God Mode Activated 👑 - Infinite creativity unleashed.",
-            "admin": "Access Granted: Developer Admin Privileges Authorized.",
-            "author": "Created & Crafted by Tanveer Hussain (@vexornull)",
-            "cyan": "Color Palette Switched to Neon Cyan",
-            "purple": "Color Palette Switched to Deep Purple Glow",
-            "green": "Color Palette Switched to Emerald WhatsApp Green",
-            "reset": "Terminal state reset to default parameters.",
-            "panic": "No Panic! System is protected by redundancy safeguards.",
-            "test": "Test sequence complete. Everything is running smooth!",
-            "exit": "Closing terminal session... (Use 'clear' to restart)"
+            "warp": "Toggled Hyper-Drive Particle Motion Mode.",
+            "matrix": "Toggled Digital Matrix Rain Simulation Engine."
         };
+
+        function processCommand(cmd) {
+            playAudioTone(800, 1600, 'square');
+            const cmdLine = document.createElement('p');
+            cmdLine.innerHTML = `<span style="color: var(--accent);">$</span> ${cmd}`;
+            termHistory.appendChild(cmdLine);
+
+            const resLine = document.createElement('p');
+            resLine.style.color = '#94a3b8';
+
+            if (cmd === 'clear') {
+                termHistory.innerHTML = '';
+                return;
+            } else if (cmd === 'whatsapp') {
+                window.open('https://wa.me/923229522470', '_blank');
+                resLine.innerHTML = commandMatrix['whatsapp'];
+            } else if (cmd === 'warp') {
+                warpSpeed = warpSpeed === 1 ? 4.5 : 1;
+                resLine.innerHTML = commandMatrix['warp'];
+            } else if (cmd === 'matrix') {
+                isMatrixMode = !isMatrixMode;
+                resLine.innerHTML = commandMatrix['matrix'];
+            } else if (commandMatrix[cmd]) {
+                resLine.innerHTML = commandMatrix[cmd];
+            } else {
+                resLine.innerHTML = `Command not recognized: '${cmd}'. Type 'help' or 'list'.`;
+            }
+
+            termHistory.appendChild(resLine);
+            termHistory.scrollTop = termHistory.scrollHeight;
+        }
+
+        function executeQuickCmd(cmd) {
+            processCommand(cmd);
+        }
 
         termInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const cmd = termInput.value.trim().toLowerCase();
                 termInput.value = '';
-                playAudioTone(800, 1600, 'square');
-
-                const cmdLine = document.createElement('p');
-                cmdLine.innerHTML = `<span style="color: var(--accent);">$</span> ${cmd}`;
-                termHistory.appendChild(cmdLine);
-
-                const resLine = document.createElement('p');
-                resLine.style.color = '#94a3b8';
-
-                if (cmd === 'clear') {
-                    termHistory.innerHTML = '';
-                    return;
-                } else if (cmd === 'whatsapp') {
-                    window.open('https://wa.me/923229522470', '_blank');
-                    resLine.innerHTML = commandMatrix['whatsapp'];
-                } else if (cmd === 'instagram') {
-                    window.open('https://instagram.com/vexornull', '_blank');
-                    resLine.innerHTML = commandMatrix['instagram'];
-                } else if (cmd === 'contact') {
-                    openContact();
-                    resLine.innerHTML = "Opening direct contact interface...";
-                } else if (cmd === 'warp') {
-                    warpSpeed = warpSpeed === 1 ? 4.5 : 1;
-                    resLine.innerHTML = commandMatrix['warp'];
-                } else if (cmd === 'matrix') {
-                    isMatrixMode = !isMatrixMode;
-                    resLine.innerHTML = commandMatrix['matrix'];
-                } else if (cmd === 'sound') {
-                    playAudioTone(300, 1200, 'sine');
-                    resLine.innerHTML = commandMatrix['sound'];
-                } else if (cmd === 'reload') {
-                    location.reload();
-                    resLine.innerHTML = commandMatrix['reload'];
-                } else if (commandMatrix[cmd]) {
-                    resLine.innerHTML = commandMatrix[cmd];
-                } else {
-                    resLine.innerHTML = `Command not recognized: '<span style="color:var(--accent)">${cmd}</span>'. Type <span style="color:var(--accent)">'help'</span> or <span style="color:var(--accent)">'list'</span> for 50+ commands.`;
-                }
-
-                termHistory.appendChild(resLine);
-                termHistory.scrollTop = termHistory.scrollHeight;
+                processCommand(cmd);
             }
         });
 
