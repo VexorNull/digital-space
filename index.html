@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Premium Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Digital Space | V8 Quantum Nexus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg: #0b0f17;
-            --surface: #161b26;
+            --bg: #000308;
+            --surface: rgba(6, 11, 25, 0.82);
+            --surface-hover: rgba(12, 20, 42, 0.92);
             --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.25);
+            --accent-glow: rgba(56, 189, 248, 0.65);
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.12);
         }
 
         * {
@@ -31,48 +35,118 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Ambient Background Glow */
-        .glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--accent);
-            filter: blur(150px);
-            opacity: 0.15;
+        /* Quantum Dynamic Cursor */
+        #cursor-follower {
+            position: fixed;
+            width: 34px;
+            height: 34px;
+            border: 2px dashed var(--accent-cyan);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: transform 0.04s ease, width 0.2s, height 0.2s;
+            z-index: 10000;
+            box-shadow: 0 0 25px var(--accent-glow);
+            animation: rotateCursor 8s linear infinite;
         }
 
-        /* Navigation */
+        @keyframes rotateCursor { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+        #cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 10001;
+            box-shadow: 0 0 12px var(--accent-purple);
+        }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent), var(--accent-purple));
+            width: 0%;
+            z-index: 9999;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        #quantum-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation Bar */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 10%;
-            background: rgba(11, 15, 23, 0.8);
-            backdrop-filter: blur(12px);
+            padding: 1rem 8%;
+            background: rgba(2, 6, 18, 0.8);
+            backdrop-filter: blur(30px);
             position: fixed;
-            width: 100%;
-            top: 0;
+            width: 90%;
+            top: 20px;
+            left: 5%;
             z-index: 100;
-            border-bottom: 1px solid var(--border);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.95);
         }
 
         .logo {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
 
-        .logo span { color: var(--accent); }
+        .logo span { color: var(--accent-cyan); }
+
+        /* Audio Visualizer Waves */
+        .audio-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 18px;
+            margin-left: 1rem;
+        }
+
+        .audio-bar {
+            width: 3px;
+            height: 100%;
+            background: var(--accent-cyan);
+            border-radius: 3px;
+            animation: bounce 1.2s ease-in-out infinite alternate;
+        }
+
+        .audio-bar:nth-child(2) { animation-delay: 0.2s; background: var(--accent); }
+        .audio-bar:nth-child(3) { animation-delay: 0.4s; background: var(--accent-purple); }
+        .audio-bar:nth-child(4) { animation-delay: 0.6s; background: var(--accent-green); }
+
+        @keyframes bounce {
+            0% { height: 4px; }
+            100% { height: 18px; }
+        }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.2rem;
             list-style: none;
         }
 
@@ -80,207 +154,454 @@
             color: var(--text-muted);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             transition: 0.3s;
         }
 
-        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-glow); }
 
-        /* Hero Section */
+        /* Hero Container */
         .hero {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center;
+            gap: 3.5rem;
+            padding: 160px 8% 60px 8%;
             position: relative;
-            padding-top: 80px;
+            z-index: 1;
         }
 
         .badge {
-            align-self: flex-start;
-            padding: 0.4rem 1rem;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid var(--accent);
-            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 1.3rem;
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-pulse {
+            width: 9px;
+            height: 9px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 14px var(--accent-green);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-size: clamp(3rem, 6vw, 5.2rem);
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+            line-height: 1.05;
+            margin-bottom: 1.6rem;
+            letter-spacing: -1.5px;
         }
 
         .hero h1 span {
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             color: var(--text-muted);
-            max-width: 600px;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            font-size: 1.18rem;
+            margin-bottom: 2.4rem;
+            max-width: 620px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.2rem;
         }
 
         .cta-btn {
-            display: inline-block;
-            width: fit-content;
-            padding: 0.8rem 2rem;
-            background: var(--accent);
+            padding: 1rem 2.6rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent));
             color: #000;
             font-weight: 800;
-            border-radius: 8px;
+            border-radius: 14px;
             text-decoration: none;
-            box-shadow: 0 0 20px var(--accent-glow);
+            box-shadow: 0 0 35px var(--accent-glow);
             transition: 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 60px var(--accent-glow);
         }
 
-        /* Features/Services Section */
-        .section {
-            padding: 6rem 10%;
+        .secondary-btn {
+            padding: 1rem 2.6rem;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            font-weight: 600;
+            border-radius: 14px;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
         }
 
-        .section-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
+        .secondary-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.06);
+        }
+
+        /* Interactive Command Terminal */
+        .terminal-card {
+            background: rgba(4, 8, 20, 0.92);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 35px 80px rgba(0,0,0,0.95);
+            display: flex;
+            flex-direction: column;
+            height: 380px;
+            backdrop-filter: blur(25px);
+        }
+
+        .terminal-header {
+            background: rgba(10, 16, 32, 0.95);
+            padding: 1rem 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ef4444; }
+        .yellow { background: #f59e0b; }
+        .green { background: #10b981; }
+
+        .terminal-body {
+            padding: 1.3rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            line-height: 1.6;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .terminal-input-line input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--accent-cyan);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            width: 100%;
+        }
+
+        /* Layout Structure */
+        .section { padding: 7.5rem 8%; position: relative; z-index: 1; }
+        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 2.5rem; letter-spacing: -0.5px; }
+
+        .filter-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2.8rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.65rem 1.6rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 2.2rem;
         }
 
-        .card {
+        .tilt-card {
             background: var(--surface);
-            padding: 2rem;
-            border-radius: 12px;
+            padding: 2.5rem;
+            border-radius: 22px;
             border: 1px solid var(--border);
+            transition: transform 0.2s ease, border-color 0.3s ease, background 0.3s ease;
+            transform-style: preserve-3d;
+            backdrop-filter: blur(20px);
+            will-change: transform;
+        }
+
+        .tilt-card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--surface-hover);
+        }
+
+        .tilt-card i { font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 1.5rem; }
+        .tilt-card h3 { font-size: 1.4rem; margin-bottom: 0.7rem; font-weight: 800; }
+        .tilt-card p { color: var(--text-muted); font-size: 0.98rem; }
+
+        .tags {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 1.6rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.78rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Modal Contact Window */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(25px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(8, 12, 22, 0.95);
+            padding: 3rem;
+            border-radius: 26px;
+            border: 1px solid var(--border);
+            width: 90%;
+            max-width: 540px;
+            position: relative;
+            box-shadow: 0 35px 90px rgba(0,0,0,0.95);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.8rem;
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
+        .close-btn:hover { color: var(--accent-cyan); }
+
+        .modal form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 2rem;
         }
 
-        .card i {
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
+        .modal input, .modal textarea {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 12px;
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.95rem;
         }
 
-        .card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
+        .modal input:focus, .modal textarea:focus { border-color: var(--accent-cyan); }
 
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Footer */
         footer {
-            padding: 3rem 10%;
-            background: var(--surface);
+            padding: 3.8rem 8%;
+            background: rgba(4, 8, 18, 0.95);
             border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .credit {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .credit strong {
-            color: var(--accent);
-        }
+        .credit { color: var(--text-muted); font-size: 0.95rem; }
+        .credit strong { color: var(--accent-cyan); }
 
         .socials a {
             color: var(--text-muted);
-            font-size: 1.2rem;
-            margin-left: 1rem;
+            font-size: 1.45rem;
+            margin-left: 1.5rem;
             transition: 0.3s;
         }
 
-        .socials a:hover {
-            color: var(--accent);
-        }
+        .socials a:hover { color: var(--accent-cyan); }
 
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; padding-top: 150px; }
             .nav-links { display: none; }
+            nav { width: 90%; left: 5%; }
+            #cursor-follower, #cursor-dot { display: none; }
             footer { flex-direction: column; text-align: center; }
-            .socials a { margin: 0 0.5rem; }
+            .socials a { margin: 0 0.6rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="glow" style="top: -50px; left: -50px;"></div>
-    <div class="glow" style="bottom: 10%; right: 0;"></div>
+    <div id="cursor-follower"></div>
+    <div id="cursor-dot"></div>
+    <div id="scroll-progress"></div>
+    <canvas id="quantum-canvas"></canvas>
 
-    <!-- Navigation -->
     <nav>
-        <div class="logo">PORTFOLIO<span>.</span></div>
+        <div class="logo">
+            <i class="fa-solid fa-atom" style="color: var(--accent-cyan);"></i> DIGITAL<span>.SPACE V8</span>
+            <div class="audio-bars">
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+                <div class="audio-bar"></div>
+            </div>
+        </div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="javascript:void(0)" onclick="openContact()">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="about">
-        <div class="badge">Available for Work</div>
-        <h1>Architecting Next-Gen <span>Digital Experiences</span></h1>
-        <p>Building ultra-fast, visually stunning web environments optimized for modern scalability and performance.</p>
-        <a href="#projects" class="cta-btn">Explore Work</a>
-    </section>
+        <div>
+            <div class="badge"><span class="badge-pulse"></span> Quantum Nexus Core • V8 Hyper Engine</div>
+            <h1>Quantum <span>Performance Platforms</span></h1>
+            <p>Engineered with Web Audio synthesis, real-time particle kinematics, matrix-based glitch interactions, and V8 hardware acceleration.</p>
+            
+            <div class="btn-group">
+                <a href="#projects" class="cta-btn" onclick="playQuantumAudio(500, 1000, 'triangle')">Explore Nexus</a>
+                <button class="secondary-btn" onclick="openContact(); playQuantumAudio(600, 1200, 'sine');">Direct Uplink</button>
+            </div>
+        </div>
 
-    <!-- Services / Skills Section -->
-    <section class="section" id="services">
-        <h2 class="section-title">Core Expertise</h2>
-        <div class="grid">
-            <div class="card">
-                <i class="fa-solid fa-code"></i>
-                <h3>Web Architecture</h3>
-                <p>Clean, semantic, and high-performance frontend and backend integration.</p>
+        <div class="terminal-card">
+            <div class="terminal-header">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <span style="font-family: 'Fira Code'; font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">quantum-core.sh</span>
             </div>
-            <div class="card">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <h3>UI/UX Design</h3>
-                <p>Minimalist interfaces designed around user engagement and seamless navigation.</p>
+            <div class="terminal-body" id="terminal-history">
+                <p style="color: var(--text-muted);">Quantum Nexus Active. Type <span style="color: var(--accent-cyan);">'help'</span> for available operational protocols.</p>
             </div>
-            <div class="card">
-                <i class="fa-solid fa-gauge-high"></i>
-                <h3>Optimization</h3>
-                <p>Lightning-fast load times, SEO perfection, and responsive layouts across all viewports.</p>
+            <div style="padding: 0 1.3rem 1.3rem 1.3rem;">
+                <div class="terminal-input-line">
+                    <span style="color: var(--accent-cyan); font-family: 'Fira Code';">$</span>
+                    <input type="text" id="term-input" placeholder="type help, warp, ping, skills..." autocomplete="off">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <section class="section" id="capabilities">
+        <h2 class="section-title">Quantum Capabilities</h2>
+        <div class="grid">
+            <div class="tilt-card" onmouseenter="playQuantumAudio(350, 700, 'sine')">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>Sub-Millisecond Engine</h3>
+                <p>Zero layout shifts, instant reactive state hydration, and high-velocity CSS rendering pipelines.</p>
+            </div>
+            <div class="tilt-card" onmouseenter="playQuantumAudio(350, 700, 'sine')">
+                <i class="fa-solid fa-network-wired"></i>
+                <h3>Dynamic Particle Physics</h3>
+                <p>Dynamic force-field particle velocity, connection web vectors, and mouse coordinate acceleration.</p>
+            </div>
+            <div class="tilt-card" onmouseenter="playQuantumAudio(350, 700, 'sine')">
+                <i class="fa-solid fa-wave-square"></i>
+                <h3>Audio Synthesis</h3>
+                <p>Native Web Audio API sound generator delivering custom feedback tones during hover and click states.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="projects">
+        <h2 class="section-title">Nexus Projects</h2>
+
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterProjects('all'); playQuantumAudio(650, 1300, 'sine');">All Platforms</button>
+            <button class="filter-btn" onclick="filterProjects('web'); playQuantumAudio(650, 1300, 'sine');">Web Platforms</button>
+            <button class="filter-btn" onclick="filterProjects('core'); playQuantumAudio(650, 1300, 'sine');">Core Engines</button>
+        </div>
+
+        <div class="grid">
+            <div class="tilt-card project-card" data-category="web" onmouseenter="playQuantumAudio(450, 900, 'triangle')">
+                <i class="fa-solid fa-layer-group"></i>
+                <h3>Digital Space V8 Nexus</h3>
+                <p>Interactive web environment equipped with real-time command terminal, audio visualizers, and glassmorphic UI elements.</p>
+                <div class="tags">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">Quantum Kinematics</span>
+                    <span class="tag">Web Audio API</span>
+                </div>
+            </div>
+
+            <div class="tilt-card project-card" data-category="core" onmouseenter="playQuantumAudio(450, 900, 'triangle')">
+                <i class="fa-solid fa-shield-virus"></i>
+                <h3>Quantum Core Monitor</h3>
+                <p>System monitoring suite built for low-latency operational visual feedback and high frame-rate performance.</p>
+                <div class="tags">
+                    <span class="tag">JavaScript V8</span>
+                    <span class="tag">Web Physics</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeContact()">&times;</span>
+            <h2 style="font-size: 1.7rem; font-weight: 800;">Establish Quantum Uplink</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Transmit direct message into system log.</p>
+            <form action="https://formspree.io/f/xbjnqrrr" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email Address" required>
+                <textarea name="message" rows="4" placeholder="Your Message..." required></textarea>
+                <button type="submit" class="cta-btn" style="width: 100%;">Transmit Message</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <div class="credit">
-            Crafted with precision • Credit <strong>@VexorNull Social Handle</strong>
+            Quantum Nexus Engine • Credit <strong>@VexorNull Social Handle</strong>
         </div>
         <div class="socials">
             <a href="#"><i class="fa-brands fa-github"></i></a>
@@ -289,5 +610,203 @@
         </div>
     </footer>
 
+    <script>
+        // Custom Dynamic Cursor Controls
+        const follower = document.getElementById('cursor-follower');
+        const dot = document.getElementById('cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        // Web Audio Synthesizer
+        let audioCtx;
+        function playQuantumAudio(startFreq, endFreq, waveType = 'sine') {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = waveType;
+                osc.frequency.setValueAtTime(startFreq, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(endFreq, audioCtx.currentTime + 0.05);
+                
+                gain.gain.setValueAtTime(0.025, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch(e) {}
+        }
+
+        // Modal Controls
+        function openContact() { document.getElementById('contactModal').style.display = 'flex'; }
+        function closeContact() { document.getElementById('contactModal').style.display = 'none'; }
+
+        // Scroll Tracker
+        window.addEventListener('scroll', () => {
+            const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (window.scrollY / totalScroll) * 100;
+            document.getElementById('scroll-progress').style.width = scrollPercent + '%';
+        });
+
+        // Quantum Canvas Animation
+        const canvas = document.getElementById('quantum-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0, mouseY = 0;
+        let warpSpeed = 1;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 2 + 1;
+                this.alpha = Math.random() * 0.5 + 0.3;
+            }
+            update() {
+                this.x += this.vx * warpSpeed;
+                this.y += this.vy * warpSpeed;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    this.x += dx * 0.015;
+                    this.y += dy * 0.015;
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(6, 182, 212, ${this.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 90; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(6, 182, 212, ${0.18 - dist/120})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Terminal Operations Shell
+        const termInput = document.getElementById('term-input');
+        const termHistory = document.getElementById('terminal-history');
+
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = termInput.value.trim().toLowerCase();
+                termInput.value = '';
+                playQuantumAudio(800, 1600, 'square');
+
+                const cmdLine = document.createElement('p');
+                cmdLine.innerHTML = `<span style="color: var(--accent-cyan);">$</span> ${cmd}`;
+                termHistory.appendChild(cmdLine);
+
+                const resLine = document.createElement('p');
+                resLine.style.color = '#94a3b8';
+
+                if (cmd === 'help') {
+                    resLine.innerHTML = `Quantum Commands: <span style="color:var(--accent-cyan)">skills</span>, <span style="color:var(--accent-cyan)">ping</span>, <span style="color:var(--accent-cyan)">warp</span>, <span style="color:var(--accent-cyan)">projects</span>, <span style="color:var(--accent-cyan)">contact</span>, <span style="color:var(--accent-cyan)">clear</span>`;
+                } else if (cmd === 'skills') {
+                    resLine.innerHTML = `Matrix Core: Pure JS V8, Canvas Particle Kinematics, Dynamic Audio API, Ultra Glassmorphism.`;
+                } else if (cmd === 'ping') {
+                    resLine.innerHTML = `Quantum Response: <span style="color:var(--accent-green)">0.12ms</span> Latency Nominal.`;
+                } else if (cmd === 'warp') {
+                    warpSpeed = warpSpeed === 1 ? 4.5 : 1;
+                    resLine.innerHTML = `Particle Warp Drive set to ${warpSpeed === 4.5 ? 'HYPER-SPEED (4.5x)' : 'NOMINAL (1x)'}.`;
+                } else if (cmd === 'projects') {
+                    resLine.innerHTML = `Active Systems: Digital Space V8 Nexus, Quantum Core Monitor. Check 'Work' section.`;
+                } else if (cmd === 'contact') {
+                    openContact();
+                    resLine.innerHTML = `Opening Quantum Uplink Modal...`;
+                } else if (cmd === 'clear') {
+                    termHistory.innerHTML = '';
+                    return;
+                } else {
+                    resLine.innerHTML = `Unrecognized Operational Command. Type <span style="color:var(--accent-cyan)">'help'</span>.`;
+                }
+
+                termHistory.appendChild(resLine);
+                termHistory.scrollTop = termHistory.scrollHeight;
+            }
+        });
+
+        // 3D Card Physics
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width/2;
+                const y = e.clientY - rect.top - rect.height/2;
+                card.style.transform = `perspective(1000px) rotateX(${-y/10}deg) rotateY(${x/10}deg) translateY(-6px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        // Category Filter
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
